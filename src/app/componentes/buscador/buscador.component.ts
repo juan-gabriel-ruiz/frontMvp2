@@ -58,7 +58,7 @@ export class BuscadorComponent implements OnInit {
 
     console.log("filtros: ", this.filtros);
     
-    this.http.post<any>('http://localhost:3000/generar-receta', { nombrePlato, filtros: this.filtros})
+    this.http.post<any>('https://qo5ujta37f.execute-api.us-east-1.amazonaws.com/nuev/funcionmvp1', { nombrePlato, filtros: this.filtros})
       .subscribe({
         next: (response) => {          
           const textoLimpio = response.receta.replace(/\*/g, '').trim();
