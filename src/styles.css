@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+  /* Fondo */
+  --color-bg-light: #CADBB7;
+  --color-bg-light-opacity: 0.8;
+  --color-bg-dark: #121212;
+  --color-bg-pattern: #21561b;
+  --color-cta-bg-light: rgba(255, 255, 255, 0.4);
+  --color-receta-bg-light: rgba(255, 255, 255, 0.205);
+
+  /* Texto */
+  --color-text-light: #222222;
+  --color-text-dark: #D8F2E2;
+
+  /* Botones y destacados */
+  --color-primary: #46592B;       
+  --color-primary-hover: #93A267;  
+  --color-primary-dark-hover: #a4b536;
+
+  /* Modos */
+  --color-cta-bg-dark: rgba(30, 40, 30, 0.6);
+
+  /* Sombras */
+  --color-shadow-light: rgba(0, 0, 0, 0.1);
+  --color-shadow-dark: rgba(255, 255, 255, 0.05);
+
+  /* Textos específicos */
+  --color-title-span-light: #93A267;
+  --color-title-span-dark: #cddc39;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: var(--color-bg-light);
+  opacity: var(--color-bg-light-opacity);
+  background-image: 
+    radial-gradient(var(--color-bg-pattern) 1.55px, transparent 1.55px),
+    radial-gradient(var(--color-bg-pattern) 1.55px, var(--color-bg-light) 1.55px);
+  background-size: 62px 62px;
+  background-position: 0 0, 31px 31px;
+  transition: background-color 0.4s ease, opacity 0.4s ease;
+}
+
+body.dark-mode {
+  background-color: var(--color-bg-dark);
+  opacity: 1;
+  background-image: none;
+  transition: background-color 0.4s ease, opacity 0.4s ease;
+}

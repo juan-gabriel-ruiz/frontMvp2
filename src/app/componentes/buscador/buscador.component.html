@@ -1,0 +1,134 @@
+<div class="glass-container" [ngClass]="{ 'dark-mode': isDarkMode, 'light-mode': !isDarkMode }">
+    <!-- Switch modo oscuro -->
+  <label class="switch">
+    <input type="checkbox" (change)="toggleDarkMode()" [checked]="isDarkMode" />
+    <span class="slider round"></span>
+  </label>
+  <div class="glass-card">
+    <h1>Buscar Receta por Ingredientes</h1>
+    <img src="https://media-public.canva.com/atWG8/MAF-OXatWG8/1/s.png" alt="Icono receta" class="recipe-icon" />
+
+    <form #recetaForm="ngForm" (ngSubmit)="buscarReceta(recetaForm)">
+      <div class="form-group">
+        <label for="ingredientes">Ingredientes (separados por coma):</label>
+        <input
+          type="text"
+          id="ingredientes"
+          name="ingredientes"
+          [(ngModel)]="ingredientes"
+          required
+        />
+      </div>
+      <h3>(Opcional) Selecciona los filtros que necesites </h3>
+      <div class="filtros-wrapper">
+        <div class="filtro">
+          <span class="filtro-label">Tipo de dieta</span>
+          <select name="tipoDieta" [(ngModel)]="filtros.tipoDieta">
+            <option value="">-- Seleccionar --</option>
+            <option value="vegetariana">Vegetariana</option>
+            <option value="vegana">Vegana</option>
+            <option value="celiaca">Celíaca</option>
+            <option value="baja-gluten">Baja en gluten</option>
+            <option value="baja-azucar">Baja en azúcar</option>
+          </select>
+        </div>
+
+        <div class="filtro">
+          <span class="filtro-label">Tiempo de preparación</span>
+          <select name="tiempo" [(ngModel)]="filtros.tiempo">
+            <option value="">-- Seleccionar --</option>
+            <option value="rapido">Rápido (-30min)</option>
+            <option value="medio">Medio (30-60min)</option>
+            <option value="largo">Largo (+60min)</option>
+          </select>
+        </div>
+
+        <div class="filtro">
+          <span class="filtro-label">Dificultad</span>
+          <select name="dificultad" [(ngModel)]="filtros.dificultad">
+            <option value="">-- Seleccionar --</option>
+            <option value="facil">Fácil</option>
+            <option value="media">Media</option>
+            <option value="dificil">Difícil</option>
+          </select>
+        </div>
+
+        <div class="filtro">
+          <span class="filtro-label">Cocina/Origen</span>
+          <select name="origen" [(ngModel)]="filtros.origen">
+            <option value="">-- Seleccionar --</option>
+            <option value="italiana">Italiana</option>
+            <option value="mexicana">Mexicana</option>
+            <option value="japonesa">Japonesa</option>
+            <option value="argentina">Argentina</option>
+          </select>
+        </div>
+
+        <div class="filtro">
+          <span class="filtro-label">Tipo de plato</span>
+          <select name="tipoPlato" [(ngModel)]="filtros.tipoPlato">
+            <option value="">-- Seleccionar --</option>
+            <option value="entrada">Entrada</option>
+            <option value="principal">Principal</option>
+            <option value="postre">Postre</option>
+          </select>
+        </div>
+
+        <div class="filtro">
+          <span class="filtro-label">Método de cocción:</span>
+          <select name="coccion" [(ngModel)]="filtros.coccion">
+            <option value="">-- Seleccionar --</option>
+            <option value="horno">Horno</option>
+            <option value="sarten">Sartén</option>
+            <option value="olla">Olla</option>
+            <option value="parrilla">Parrilla</option>
+            <option value="sinCoccion">Sin coccion</option>
+          </select>
+        </div>
+
+        <div class="checkbox-wrapper">
+          <input type="checkbox" name="nutricional" id="nutricional" [(ngModel)]="filtros.nutricional" />
+          <label for="nutricional">Información nutricional</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <button type="submit" [disabled]="loading">Buscar</button>
+      </div>
+    </form>
+
+    <!-- Mostrar "Generando receta..." mientras carga -->
+    <div *ngIf="loading">Generando receta...</div>
+
+<!-- Contenedor de las recetas en fila -->
+    <div class="recetas-container" *ngIf="recetaSeparada1 || recetaSeparada2">
+      <div *ngIf="recetaSeparada1" class="receta-generada">
+        <h2>Receta 1:</h2>
+        <p>{{ recetaSeparada1 }}</p>
+          <button (click)="leerEnVozAlta(recetaSeparada1)">🔊 Leer en voz alta</button>
+          <div class="botones-lectura">
+            <button (click)="pausarLectura()">⏸️</button>
+            <button (click)="reanudarLectura()">⏯️</button>
+            <button (click)="detenerLectura()">⏹️</button>
+          </div>
+      </div>
+
+      <div *ngIf="recetaSeparada2" class="receta-generada">
+        <h2>Receta 2:</h2>
+        <p>{{ recetaSeparada2 }}</p>
+          <button (click)="leerEnVozAlta(recetaSeparada2)">🔊 Leer en voz alta</button>
+          <div class="botones-lectura">
+            <button (click)="pausarLectura()">⏸️</button>
+            <button (click)="reanudarLectura()">⏯️</button>
+            <button (click)="detenerLectura()">⏹️</button>
+          </div>
+      </div>
+</div>
+
+  </div>
+
+  <div class="side-images">
+    <img src="assets/4.png" alt="Plato 1" class="side-image left" />
+    <img src="assets/2.png" alt="Plato 2" class="side-image right" />
+  </div>
+</div>
